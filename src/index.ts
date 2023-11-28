@@ -1,9 +1,33 @@
-import "dotenv/config"
+import 'dotenv/config';
+import { init } from '@airstack/node';
+import express from 'express';
 
-export const main = async () => {
-    console.log("Start.")
-}
+init(process.env.AIRSTACK_API_KEY, 'dev');
 
-main().then(() => {
-    process.exit(0)
-})
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.post('/send', (_req, res) => {
+  res.send('Express + TypeScript Server');
+});
+
+app.get('/nfts', (_req, res) => {
+  res.send('Express + TypeScript Server');
+});
+
+app.get('/poaps', (_req, res) => {
+  res.send('Express + TypeScript Server');
+});
+
+app.get('/farcaster', (_req, res) => {
+  console.log(_req.body, _req.headers);
+  res.send('Farcaster');
+});
+
+app.get('/lens', (_req, res) => {
+  res.send('Lens');
+});
+
+app.listen(port, () => {
+  console.log(`[server]: Server is running at http://localhost:${port}`);
+});
